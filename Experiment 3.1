@@ -1,0 +1,190 @@
+Q1. WAP to take check if the triangle is valid or not. If the validity is established, do check if the triangle is isosceles, equilateral, right angle, or scalene. Take sides of the triangle 
+as input from a user.
+Solution:
+#include <stdio.h>
+
+int main() {
+    float a, b, c;
+
+    printf("Enter side a: ");
+    scanf("%f", &a);
+
+    printf("Enter side b: ");
+    scanf("%f", &b);
+
+    printf("Enter side c: ");
+    scanf("%f", &c);
+
+    if (a + b > c && a + c > b && b + c > a) {
+        printf("The triangle is valid.\n");
+
+        if (a == b && b == c) {
+            printf("It is an Equilateral Triangle.\n");
+        }
+        else if (a == b || b == c || a == c) {
+            printf("It is an Isosceles Triangle.\n");
+        }
+        else {
+            printf("It is a Scalene Triangle.\n");
+        }
+
+        if ( (a*a == b*b + c*c) ||
+             (b*b == a*a + c*c) ||
+             (c*c == a*a + b*b) ) {
+            printf("It is also a Right-Angled Triangle.\n");
+        }
+    }
+    else {
+        printf("The triangle is NOT valid.\n");
+    }
+
+    return 0;
+}
+
+Q2. WAP to compute the BMI Index of the person and print the BMI values as per the following ranges. You can use the following formula to compute BMI= weight(kgs)/Height(Mts)*Height(Mts)
+Starvation        -   <15
+Anorexic          -   15.1 to 17.5
+Underweight       -   17.6 to 18.5
+Ideal             -   18.6 to 24.9
+Overweight        -   25 to 25.9
+Obese             -   30 to 39.9
+Morbidity Obese   -   40.0 above
+Solution:
+#include <stdio.h>
+
+int main() {
+    float weight, height, bmi;
+
+    printf("Enter weight in kilograms: ");
+    scanf("%f", &weight);
+
+    printf("Enter height in meters: ");
+    scanf("%f", &height);
+
+    bmi = weight / (height * height);
+
+    printf("\nYour BMI is: %.2f\n", bmi);
+
+    if (bmi < 15) {
+        printf("Category: Starvation\n");
+    }
+    else if (bmi >= 15.1 && bmi <= 17.5) {
+        printf("Category: Anorexic\n");
+    }
+    else if (bmi >= 17.6 && bmi <= 18.5) {
+        printf("Category: Underweight\n");
+    }
+    else if (bmi >= 18.6 && bmi <= 24.9) {
+        printf("Category: Ideal\n");
+    }
+    else if (bmi >= 25.0 && bmi <= 25.9) {
+        printf("Category: Overweight\n");
+    }
+    else if (bmi >= 30.0 && bmi <= 39.9) {
+        printf("Category: Obese\n");
+    }
+    else if (bmi >= 40.0) {
+        printf("Category: Morbidly Obese\n");
+    }
+    else {
+        printf("Category: Not in chart\n");
+    }
+
+    return 0;
+}
+
+Q3. WAP to check if three points (x1,y1), (x2,y2) and (x3,y3) are collinear or not.
+Solution:
+#include <stdio.h>
+
+int main() {
+    float x1, y1, x2, y2, x3, y3, area;
+
+    printf("Enter x1 y1: ");
+    scanf("%f %f", &x1, &y1);
+
+    printf("Enter x2 y2: ");
+    scanf("%f %f", &x2, &y2);
+
+    printf("Enter x3 y3: ");
+    scanf("%f %f", &x3, &y3);
+
+    area = x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2);
+
+    if (area == 0) {
+        printf("The points are Collinear.\n");
+    } else {
+        printf("The points are NOT Collinear.\n");
+    }
+
+    return 0;
+}
+
+Q4. According to the gregorian calendar, it was Monday on the date 01/01/01. If any year is input through the keyboard write a program to find out what is the day on 1st January of this year.
+Solution:
+#include <stdio.h>
+
+int main() {
+    int year, i, total_days = 0, day;
+
+    printf("Enter the year: ");
+    scanf("%d", &year);
+
+    for (i = 1; i < year; i++) {
+        // Leap year check
+        if ((i % 4 == 0 && i % 100 != 0) || (i % 400 == 0))
+            total_days += 366;
+        else
+            total_days += 365;
+    }
+
+    day = total_days % 7;
+
+    printf("1st January %d is: ", year);
+    switch(day) {
+        case 0: printf("Monday\n"); break;
+        case 1: printf("Tuesday\n"); break;
+        case 2: printf("Wednesday\n"); break;
+        case 3: printf("Thursday\n"); break;
+        case 4: printf("Friday\n"); break;
+        case 5: printf("Saturday\n"); break;
+        case 6: printf("Sunday\n"); break;
+    }
+
+    return 0;
+}
+
+Q5. WAP using ternary operator, the user should input the length and breadth of a rectangle, one has to find out which rectangle has the highest perimeter. The minimum number of rectangles 
+should be three
+Solutions:
+#include <stdio.h>
+
+int main() {
+    float l1, b1, l2, b2, l3, b3;
+    float p1, p2, p3;
+    float max;
+
+    printf("Enter length and breadth of Rectangle 1: ");
+    scanf("%f %f", &l1, &b1);
+
+    printf("Enter length and breadth of Rectangle 2: ");
+    scanf("%f %f", &l2, &b2);
+
+    printf("Enter length and breadth of Rectangle 3: ");
+    scanf("%f %f", &l3, &b3);
+
+    p1 = 2 * (l1 + b1);
+    p2 = 2 * (l2 + b2);
+    p3 = 2 * (l3 + b3);
+
+    max = (p1 > p2) ? ( (p1 > p3) ? p1 : p3 ) 
+                   : ( (p2 > p3) ? p2 : p3 );
+
+    printf("Perimeter 1 = %.2f\n", p1);
+    printf("Perimeter 2 = %.2f\n", p2);
+    printf("Perimeter 3 = %.2f\n", p3);
+
+    printf("\nThe highest perimeter is: %.2f \n", max);
+
+    return 0;
+}
