@@ -1,0 +1,89 @@
+Q1. Declare a global variable outside all functions and use it inside various functions to understand its accessibility.
+Solution:
+#include <stdio.h>
+
+int globalVar = 10;  
+
+void display() {
+    printf("Value of globalVar in display(): %d\n", globalVar);
+}
+
+void modify() {
+    globalVar = 20;
+    printf("Value of globalVar after modification in modify(): %d\n", globalVar);
+}
+
+int main() {
+    printf("Initial value of globalVar in main(): %d\n", globalVar);
+    
+    display();
+    modify();
+    display();
+
+    return 0;
+}
+
+Q2. Declare a local variable inside a function and try to access it outside the function. Compare this with accessing the global variable from within the function.
+Solution:
+#include <stdio.h>
+
+int globalVar = 100;
+
+void testFunction() {
+    int localVar = 20; // Local variable
+    printf("Inside testFunction:\n");
+    printf("  globalVar = %d\n", globalVar);
+    printf("  localVar = %d\n", localVar);
+}
+
+int main() {
+    printf("Inside main:\n");
+    printf("  globalVar = %d\n", globalVar);  // OK: globalVar is accessible everywhere
+
+    testFunction();
+    printf("\nTrying to access localVar in main will cause a compile error.\n");
+
+    return 0;
+}
+
+Q3. Declare variables within different code blocks (enclosed by curly braces) and test their accessibility within and outside those blocks.
+Solution:
+#include <stdio.h>
+
+int main() {
+    int a = 10;  
+
+    printf("Inside main(), a = %d\n", a);
+
+    {
+        int b = 20;
+        printf("Inside first block: a = %d, b = %d\n", a, b);
+
+        {
+            int c = 30; // 'c' is accessible only inside this nested block
+            printf("Inside nested block: a = %d, b = %d, c = %d\n", a, b, c);
+        }
+
+    }
+    printf("Back in main, a = %d (still accessible)\n", a);
+
+    return 0;
+}
+
+Q4. Declare a static local variable inside a function. Observe how its value persists across function calls.
+Solution:
+#include <stdio.h>
+
+void counter() {
+    static int count = 0;   
+    count++;              
+    printf("count = %d\n", count);
+}
+
+int main() {
+    counter();  
+    counter(); 
+    counter();  
+
+    return 0;
+}
